@@ -14,19 +14,7 @@ int execute_cmd(char **args, char **drs)
 
 	if (args[0] != NULL)
 	{
-		if (_strcmp(args[0], "cd") == 0)
-		{
-			if (args[1] != NULL)
-			{
-				if (chdir(args[1]) != 0)
-					perror("cd");
-			}
-			else
-				puts("cd missing operand");
-			return (1);
-		}
-
-		else if (_strcmp(args[0], "help") == 0)
+		if (_strcmp(args[0], "help") == 0)
 		{
 			_puts("Help: command for more information\n");
 			return (1);
@@ -38,8 +26,7 @@ int execute_cmd(char **args, char **drs)
 
 	while (drs[i] != NULL)
 	{
-		full_path = malloc(sizeof(char *) * (_strlen(drs[i])
-					+ _strlen(args[0]) + 2));
+		full_path = malloc(sizeof(char) * (_strlen(drs[i]) + _strlen(args[0]) + 2));
 
 		if (full_path == NULL)
 		{
@@ -57,9 +44,11 @@ int execute_cmd(char **args, char **drs)
 
 			if (pid == 0)
 			{
-				execve(full_path, args, NULL);
-				perror("execve");
-				exit(EXIT_FAILURE);
+				if (execve(full_path, args, NULL) == -1)
+				{
+					perror("execve");
+					exit(EXIT_FAILURE);
+				}
 			}
 
 			else if (pid < 0)
@@ -77,7 +66,10 @@ int execute_cmd(char **args, char **drs)
 	puts("command not found");
 
 	for (j = 0; args[j] != NULL; j++)
+	{
 		free(args[j]);
+		args[j] = NULL;
+	}
 
 	free(args);
 	return (1);

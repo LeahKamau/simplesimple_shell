@@ -32,7 +32,7 @@ char **_tokenizer(char *line)
 
 	while (token)
 	{
-		tokens[i] = token;
+		tokens[i] = _strdup(token);
 		token = strtok(NULL, delim);
 		i++;
 	}

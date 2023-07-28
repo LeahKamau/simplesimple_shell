@@ -37,7 +37,7 @@ char **extract_dirs(char **envp)
 	}
 	num_dirs++;
 
-	directories = (char **)malloc(sizeof(char) * (num_dirs + 1));
+	directories = (char **)malloc(sizeof(char *) * (num_dirs + 1));
 
 	if (!directories)
 	{
@@ -50,7 +50,7 @@ char **extract_dirs(char **envp)
 
 	while (dir_token != NULL)
 	{
-		directories[i] = dir_token;
+		directories[i] = _strdup(dir_token);
 		dir_token = strtok(NULL, delimiter);
 		i++;
 	}
