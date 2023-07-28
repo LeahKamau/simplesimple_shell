@@ -35,8 +35,9 @@ int main(int argc, char **argv, char **envp)
 		if (cmd)
 			free(cmd);
 		if (is_interactive == 0)
-			free(args);
+			free(directories);
 	}
+
 	for (i = 0; directories[i] != NULL; i++)
 		free(directories[i]);
 
