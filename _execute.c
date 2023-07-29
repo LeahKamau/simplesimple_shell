@@ -10,7 +10,7 @@
  */
 int _execute(char **args, char **dirs)
 {
-	int i, status = 1;
+	int i = 0, status = 1;
 	char *builtin_cmd[] = {"cd", "help", "exit", NULL};
 
 	if (args[0] == NULL)

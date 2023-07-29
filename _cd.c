@@ -11,16 +11,19 @@ int _cd(char **args)
 	int status;
 
 	if (args[1] == NULL)
-		_puts("provide directory");
+	{
+		_puts("provide directory\n");
+		return (1);
+	}
 
 	status = chdir(args[1]);
-	free(args);
 
 	if (status != 0)
 	{
 		perror("Error:");
-		free(args);
 	}
+
+	free(args);
 
 	return (1);
 }

@@ -4,7 +4,7 @@
  * main - entry point
  * @argc: argument count
  * @argv: argument vector
- * @env: environment variables
+ * @envp: environment variables
  *
  * Return: 0 on success
  */
@@ -28,20 +28,25 @@ int main(int argc, char **argv, char **envp)
 		else
 			running = 0;
 
+		signal(SIGINT, ctrlc_handler);
 		cmd = line_getter();
 		args = _tokenizer(cmd);
-		running = execute_cmd(args, directories);
+		running = _execute(args, directories);
 
 		if (cmd)
 			free(cmd);
+
 		if (is_interactive == 0)
 			free(directories);
 	}
-
 	for (i = 0; directories[i] != NULL; i++)
 		free(directories[i]);
 
+
 	free(directories);
+
+	if (args)
+		free(args);
 
 	return (0);
 }

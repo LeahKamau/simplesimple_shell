@@ -9,39 +9,31 @@
 char **_tokenizer(char *line)
 {
 	char *token = NULL, **tokens = NULL;
-	char *line_cpy = _strdup(line);
-	const char *delim = " \t\n";
-	int i = 0, n = 0;
+	const char *delim = " \t\n\r\a";
+	int i = 0, n = cmd_size(line, ' ');
 
-	token = strtok(line, delim);
-	while (token != NULL)
-	{
-		n++;
-		token = strtok(NULL, delim);
-	}
 
 	tokens = (char **)malloc((n + 1) * sizeof(char *));
 
 	if (tokens == NULL)
 	{
+		free(tokens);
 		perror("malloc error");
 		exit(EXIT_FAILURE);
 	}
 
-	token = strtok(line_cpy, delim);
+	token = strtok(line, delim);
 
 	while (token)
 	{
-		tokens[i] = _strdup(token);
-		printf("tokens are %s\n", token);
+		tokens[i] = token;
+		/*printf("tokens are %s\n", token);*/
 		token = strtok(NULL, delim);
 		i++;
 	}
 
 
 	tokens[i] = NULL;
-
-	free(line_cpy);
 
 	return (tokens);
 }

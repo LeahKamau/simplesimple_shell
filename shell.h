@@ -25,6 +25,7 @@ int execute_exit(void);
 
 int _puts(char *str);
 int _strlen(char *str);
+int cmd_size(char *str, char delim);
 int _strcmp(char *s1, char *s2);
 int _strncmp(const char *s1, const char *s2, size_t n);
 char *_strdup(const char *str);

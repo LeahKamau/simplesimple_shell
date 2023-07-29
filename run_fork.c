@@ -18,6 +18,9 @@ int run_fork(char **args, char **dirs)
 	if (pid == 0)
 		execute_cmd(args, dirs);
 
+	if (args)
+		free(args);
+
 	if (pid < 0)
 		perror("Error:");
 

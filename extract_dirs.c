@@ -51,7 +51,7 @@ char **extract_dirs(char **envp)
 	while (dir_token != NULL)
 	{
 		directories[i] = _strdup(dir_token);
-		printf("directories are %s\n", dir_token);
+		/*printf("directories are %s\n", dir_token);*/
 		dir_token = strtok(NULL, delimiter);
 		i++;
 	}
